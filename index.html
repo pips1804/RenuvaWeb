@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Renuva</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* --- CSS VARIABLES (Your Palette) --- */
+      :root {
+        --dark-blue: #4288a7;
+        --light-blue: #a4d5e7;
+        --dark-green: #149056;
+        --light-green: #44d381;
+        --white: #ffffff;
+        --text-dark: #333333;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        color: var(--text-dark);
+        overflow-x: hidden;
+      }
+
+      /* --- NAVIGATION --- */
+      nav {
+        background-color: var(--white);
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 5%;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: var(--dark-blue);
+        font-weight: 600;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: color 0.3s;
+      }
+
+      .nav-link:hover {
+        color: var(--light-green);
+      }
+
+      .nav-logo-img {
+        height: 60px; /* Adjust based on your actual logo aspect ratio */
+        width: auto;
+        object-fit: contain;
+      }
+
+      /* --- HERO SECTION --- */
+      .hero {
+        position: relative;
+        height: 90vh; /* Takes up most of the screen */
+        width: 100%;
+        /* Placeholder image used - Replace URL with your hero image */
+        background-image: url("https://images.unsplash.com/photo-1593005510509-d05b2696603e?q=80&w=2070&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: var(--white);
+        text-align: center;
+      }
+
+      /* Dark overlay to make text readable */
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero h1 span {
+        color: var(--light-blue); /* Accent color for the dot */
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: var(--dark-blue);
+        color: var(--white);
+        padding: 15px 35px;
+        border-radius: 50px; /* Pill shape */
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color 0.3s, transform 0.2s;
+        border: 2px solid var(--dark-blue);
+      }
+
+      .cta-button:hover {
+        background-color: var(--dark-green);
+        border-color: var(--dark-green);
+        transform: translateY(-2px);
+      }
+
+      /* --- BRANDS SECTION --- */
+      .brands-section {
+        padding: 80px 20px;
+        text-align: center;
+        background-color: var(--white);
+      }
+
+      .brands-header h2 {
+        color: var(--dark-blue);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
+
+      .brands-header h3 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--dark-blue);
+        margin-bottom: 60px;
+      }
+
+      .brands-header h3 span {
+        color: var(
+          --light-green
+        ); /* The yellow dot in original, green in yours */
+      }
+
+      .single-brand-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .brand-link {
+        display: block;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%; /* Makes it circular like P&G brands */
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        background-color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .brand-link:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        border: 3px solid var(--light-blue);
+      }
+
+      .brand-img {
+        width: 80%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        position: relative;
+        background-color: var(--dark-blue);
+        color: var(--white);
+        padding-bottom: 50px;
+        margin-top: 100px;
+      }
+
+      /* The Curved Top Effect */
+      .footer-curve {
+        position: absolute;
+        top: -50px; /* Pulls it up */
+        left: 0;
+        width: 100%;
+        line-height: 0;
+        direction: ltr;
+      }
+
+      .footer-curve svg {
+        display: block;
+        width: 100%;
+        height: 51px; /* Height of the curve */
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .footer-column {
+        flex: 1;
+        min-width: 250px;
+        margin-bottom: 30px;
+      }
+
+      .footer-column h4 {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        color: var(--light-blue);
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+
+      .contact-info p {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .contact-info i {
+        color: var(--light-green);
+        width: 20px;
+        text-align: center;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        margin-top: 20px;
+        font-size: 0.8rem;
+        color: var(--light-blue);
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        .nav-container {
+          gap: 20px;
+        }
+        .brands-header h3 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="#brands" class="nav-link">Our Brands</a>
+
+        <img src="img/logo.png" alt="Company Logo" class="nav-logo-img" />
+
+        <a href="#story" class="nav-link">Our Story</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="story">
+      <div class="hero-content">
+        <h1>2025 Annual Report<span>.</span></h1>
+        <a href="#" class="cta-button"
+          >Explore the report
+          <i class="fas fa-arrow-right" style="margin-left: 8px"></i
+        ></a>
+      </div>
+    </header>
+
+    <section class="brands-section" id="brands">
+      <div class="brands-header">
+        <h2>Our Brands</h2>
+        <h3>Products that make life a little easier<span>.</span></h3>
+      </div>
+
+      <div class="single-brand-container">
+        <a
+          href="https://google.com"
+          target="_blank"
+          class="brand-link"
+          title="Click to view brand"
+        >
+          <img src="img/oila.png" alt="Brand Name" class="brand-img" />
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-curve">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+            opacity=".25"
+            fill="#ffffff"
+          ></path>
+          <path
+            d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43c54.52-5.23,109.8,21.6,156.67,55.11V0Z"
+            fill="#ffffff"
+          ></path>
+        </svg>
+      </div>
+
+      <div class="footer-content">
+        <div class="footer-column contact-info">
+          <h4>Contact Us</h4>
+
+          <p>
+            <i class="fas fa-map-marker-alt"></i>
+            1930 Einstein St., Brgy. San Isidro,<br />Makati City, Philippines
+          </p>
+
+          <p>
+            <i class="fas fa-phone-alt"></i>
+            09457920295
+          </p>
+
+          <p>
+            <i class="fas fa-envelope"></i>
+            email@example.com
+          </p>
+
+          <p>
+            <i class="fab fa-facebook"></i>
+            <a href="#" style="color: white; text-decoration: none"
+              >Follow us on Facebook</a
+            >
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Partners & Investors</h4>
+          <p style="opacity: 0.7">Investors</p>
+          <p style="opacity: 0.7">Partner with us</p>
+          <p style="opacity: 0.7">Suppliers</p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <p style="opacity: 0.7">Privacy</p>
+          <p style="opacity: 0.7">Terms and Conditions</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2025 Procter & Gamble (Recreated) | All Rights Reserved.
+      </div>
+    </footer>
+  </body>
+</html>
