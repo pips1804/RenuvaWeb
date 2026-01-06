@@ -3,26 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Renuva</title>
+    <title>RENUVA | Sustainable Household Solutions</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
 
     <style>
-      /* --- CSS VARIABLES (Your Palette) --- */
+      /* --- CSS VARIABLES --- */
       :root {
         --dark-blue: #4288a7;
         --light-blue: #a4d5e7;
         --dark-green: #149056;
         --light-green: #44d381;
         --white: #ffffff;
+        --off-white: #f9fbfd;
         --text-dark: #333333;
+        --text-light: #666666;
+        --nav-height: 90px;
       }
 
       * {
@@ -31,70 +33,186 @@
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         font-family: "Montserrat", sans-serif;
         color: var(--text-dark);
+        background-color: var(--white);
+        line-height: 1.6;
         overflow-x: hidden;
+      }
+
+      /* --- UTILITIES --- */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 50px;
+      }
+
+      /* IMPORTANT FIX: Offset anchor links so nav doesn't cover them */
+      section {
+        scroll-margin-top: 90px; /* 90px Nav + 20px Buffer */
+      }
+
+      .section-padding {
+        padding: 100px 0;
+      }
+
+      .bg-light {
+        background-color: var(--off-white);
+      }
+
+      h2 {
+        color: var(--dark-blue);
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+        line-height: 1.2;
+      }
+
+      h2::after {
+        content: ".";
+        color: var(--light-blue);
+      }
+
+      p {
+        color: var(--text-light);
+        margin-bottom: 20px;
+        font-size: 1.05rem;
+      }
+
+      /* --- ANIMATIONS --- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 1s ease-out;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       /* --- NAVIGATION --- */
       nav {
         background-color: var(--white);
-        height: 80px;
+        height: var(--nav-height);
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0 5%;
         position: sticky;
         top: 0;
         z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
       }
 
-      .nav-container {
+      .nav-inner {
+        width: 100%;
+        max-width: 1400px;
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        gap: 40px;
+        padding: 0 50px;
+      }
+
+      .nav-links-desktop {
+        display: flex;
+        gap: 30px;
       }
 
       .nav-link {
         text-decoration: none;
         color: var(--dark-blue);
         font-weight: 600;
-        font-size: 1rem;
+        font-size: 0.95rem;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         transition: color 0.3s;
+        position: relative;
       }
 
       .nav-link:hover {
-        color: var(--light-green);
+        color: var(--dark-green);
       }
 
       .nav-logo-img {
-        height: 60px; /* Adjust based on your actual logo aspect ratio */
+        height: 60px;
         width: auto;
         object-fit: contain;
+        transition: transform 0.3s ease;
+      }
+      .nav-logo-img:hover {
+        transform: scale(1.05);
+      }
+
+      /* Mobile Hamburger */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--dark-blue);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        border-top: 1px solid #eee;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+      }
+
+      .mobile-menu.active {
+        transform: translateY(0);
+      }
+
+      .mobile-menu .nav-link {
+        margin: 15px 0;
+        font-size: 1.1rem;
       }
 
       /* --- HERO SECTION --- */
       .hero {
         position: relative;
-        height: 90vh; /* Takes up most of the screen */
+        height: 95vh;
+        min-height: 500px;
         width: 100%;
-        /* Placeholder image used - Replace URL with your hero image */
-        background-image: url("https://images.unsplash.com/photo-1593005510509-d05b2696603e?q=80&w=2070&auto=format&fit=crop");
+        background-image: url("https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=2070&auto=format&fit=crop");
         background-size: cover;
         background-position: center;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: var(--white);
         text-align: center;
       }
 
-      /* Dark overlay to make text readable */
       .hero::before {
         content: "";
         position: absolute;
@@ -102,293 +220,790 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.4);
+        background: linear-gradient(
+          135deg,
+          rgba(66, 136, 167, 0.8),
+          rgba(20, 144, 86, 0.6)
+        );
         z-index: 1;
       }
 
       .hero-content {
         position: relative;
         z-index: 2;
+        color: var(--white);
+        padding: 20px;
+        width: 90%;
+        animation: fadeInUp 1.2s ease-out forwards;
       }
 
       .hero h1 {
-        font-size: 4rem;
+        font-size: 4.5rem;
         font-weight: 800;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        margin-bottom: 15px;
+        letter-spacing: -1px;
+        line-height: 1.1;
       }
 
-      .hero h1 span {
-        color: var(--light-blue); /* Accent color for the dot */
+      .hero p {
+        color: var(--white);
+        font-size: 1.5rem;
+        max-width: 700px;
+        margin: 0 auto 40px auto;
       }
 
-      .cta-button {
-        display: inline-block;
+      /* --- ABOUT US --- */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .mvv-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .mvv-card {
+        background: var(--white);
+        padding: 40px 30px;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border-top: 5px solid var(--dark-blue);
+        transition: transform 0.3s;
+      }
+
+      .mvv-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .mvv-card h3 {
+        color: var(--dark-green);
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+      }
+
+      /* --- SUSTAINABILITY --- */
+      .sustain-section {
         background-color: var(--dark-blue);
         color: var(--white);
-        padding: 15px 35px;
-        border-radius: 50px; /* Pill shape */
-        text-decoration: none;
-        font-weight: 600;
-        transition: background-color 0.3s, transform 0.2s;
-        border: 2px solid var(--dark-blue);
-      }
-
-      .cta-button:hover {
-        background-color: var(--dark-green);
-        border-color: var(--dark-green);
-        transform: translateY(-2px);
-      }
-
-      /* --- BRANDS SECTION --- */
-      .brands-section {
-        padding: 80px 20px;
         text-align: center;
-        background-color: var(--white);
       }
 
-      .brands-header h2 {
-        color: var(--dark-blue);
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 10px;
+      .sustain-section h2 {
+        color: var(--white);
+      }
+      .sustain-section p {
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 800px;
+        margin: 0 auto 20px auto;
       }
 
-      .brands-header h3 {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--dark-blue);
-        margin-bottom: 60px;
+      /* --- BRANDS --- */
+      .brand-layout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 60px;
+        flex-wrap: wrap;
       }
 
-      .brands-header h3 span {
-        color: var(
-          --light-green
-        ); /* The yellow dot in original, green in yours */
-      }
-
-      .single-brand-container {
+      .brand-visual {
+        flex: 1;
+        max-width: 400px;
         display: flex;
         justify-content: center;
-        align-items: center;
       }
 
-      .brand-link {
-        display: block;
-        width: 250px;
-        height: 250px;
-        border-radius: 50%; /* Makes it circular like P&G brands */
+      .brand-circle {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
         overflow: hidden;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
-        background-color: var(--white);
+        border: 4px solid var(--white);
+        box-shadow: 0 15px 40px rgba(66, 136, 167, 0.2);
+        transition: transform 0.4s, border-color 0.3s;
+        cursor: pointer;
+        background-color: white;
         display: flex;
         align-items: center;
         justify-content: center;
       }
 
-      .brand-link:hover {
+      .brand-circle:hover {
         transform: scale(1.05);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        border: 3px solid var(--light-blue);
+        border-color: var(--light-blue);
       }
 
-      .brand-img {
+      .brand-circle img {
         width: 80%;
         height: auto;
         object-fit: contain;
       }
 
+      .brand-info {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .brand-info h3 {
+        font-size: 2rem;
+        color: var(--dark-green);
+        margin-bottom: 15px;
+      }
+
+      /* --- PARTNERS --- */
+      .partners-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+      }
+
+      .why-list {
+        list-style: none;
+      }
+      .why-list li {
+        margin-bottom: 15px;
+        padding-left: 35px;
+        position: relative;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+      .why-list li::before {
+        content: "\f00c";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        color: var(--light-green);
+        font-size: 1.2rem;
+      }
+
+      .info-card {
+        background: linear-gradient(
+          to right,
+          rgba(164, 213, 231, 0.2),
+          rgba(255, 255, 255, 1)
+        );
+        padding: 30px;
+        border-left: 5px solid var(--dark-blue);
+        margin-bottom: 30px;
+        transition: transform 0.3s;
+      }
+      .info-card:hover {
+        transform: translateX(10px);
+      }
+      .info-card h4 {
+        color: var(--dark-blue);
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      /* --- FAQ SECTION --- */
+      .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .faq-item {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+      }
+
+      .faq-question {
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        padding: 20px 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--dark-blue);
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        font-family: "Montserrat", sans-serif;
+        transition: color 0.3s;
+      }
+
+      .faq-question:hover {
+        color: var(--dark-green);
+      }
+      .faq-question span {
+        flex: 1;
+        padding-right: 10px;
+      }
+      .faq-icon {
+        flex-shrink: 0;
+        transition: transform 0.4s;
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .faq-answer p {
+        padding-bottom: 20px;
+        margin: 0;
+      }
+      .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+      }
+
       /* --- FOOTER --- */
       footer {
-        position: relative;
         background-color: var(--dark-blue);
         color: var(--white);
-        padding-bottom: 50px;
-        margin-top: 100px;
+        padding: 80px 0 30px 0;
       }
 
-      /* The Curved Top Effect */
-      .footer-curve {
-        position: absolute;
-        top: -50px; /* Pulls it up */
-        left: 0;
-        width: 100%;
-        line-height: 0;
-        direction: ltr;
-      }
-
-      .footer-curve svg {
-        display: block;
-        width: 100%;
-        height: 51px; /* Height of the curve */
+      footer p,
+      footer a,
+      footer li,
+      footer h4,
+      footer div {
+        color: var(--white) !important;
       }
 
       .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px 20px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        align-items: flex-start;
+        gap: 40px;
+        margin-bottom: 50px;
       }
-
-      .footer-column {
+      .footer-col {
         flex: 1;
         min-width: 250px;
-        margin-bottom: 30px;
       }
 
-      .footer-column h4 {
-        font-size: 1.1rem;
-        margin-bottom: 20px;
-        color: var(--light-blue);
+      .footer-col h4 {
+        color: var(--light-blue) !important;
+        margin-bottom: 25px;
         text-transform: uppercase;
-        font-weight: 800;
+        font-weight: 700;
       }
 
-      .contact-info p {
-        margin-bottom: 12px;
+      .contact-details p {
         display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 0.95rem;
-        line-height: 1.5;
+        gap: 15px;
+        margin-bottom: 15px;
       }
-
-      .contact-info i {
-        color: var(--light-green);
-        width: 20px;
-        text-align: center;
+      .contact-details i {
+        color: var(--light-green) !important;
+        margin-top: 5px;
       }
 
       .footer-bottom {
-        text-align: center;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         padding-top: 20px;
-        margin-top: 20px;
-        font-size: 0.8rem;
-        color: var(--light-blue);
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--light-blue) !important;
       }
 
-      /* Responsive Adjustments */
+      /* =========================================
+           RESPONSIVE MEDIA QUERIES
+           ========================================= */
+
+      @media (max-width: 1024px) {
+        .hero h1 {
+          font-size: 3.5rem;
+        }
+        .brand-circle {
+          width: 250px;
+          height: 250px;
+        }
+        .mvv-container {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
       @media (max-width: 768px) {
+        /* General */
+        .section-padding {
+          padding: 60px 0;
+        }
+        h2 {
+          font-size: 2rem;
+        }
+
+        /* UPDATED: Nav Padding for Mobile */
+        .nav-inner {
+          padding: 0 30px;
+        }
+
+        /* UPDATED: Container Padding for Mobile (Increased from 20 to 30) */
+        .container {
+          padding: 0 30px;
+        }
+
+        .nav-links-desktop {
+          display: none;
+        }
+        .hamburger {
+          display: block;
+        }
+
         .hero h1 {
           font-size: 2.5rem;
         }
-        .nav-container {
-          gap: 20px;
+        .hero p {
+          font-size: 1.1rem;
         }
-        .brands-header h3 {
-          font-size: 1.8rem;
+
+        .mvv-container {
+          grid-template-columns: 1fr;
+        }
+        .partners-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .brand-layout {
+          flex-direction: column;
+          text-align: center;
+          gap: 30px;
+        }
+        .brand-info {
+          width: 100%;
+        }
+        .brand-circle {
+          width: 220px;
+          height: 220px;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          gap: 30px;
+        }
+        .footer-col {
+          margin-bottom: 20px;
+        }
+
+        .faq-question {
+          font-size: 1rem;
+          padding: 15px 10px;
+          align-items: flex-start;
+        }
+        .faq-icon {
+          margin-top: 5px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+        .nav-logo-img {
+          height: 45px;
         }
       }
     </style>
   </head>
   <body>
     <nav>
-      <div class="nav-container">
-        <a href="#brands" class="nav-link">Our Brands</a>
+      <div class="nav-inner">
+        <div class="nav-links-desktop">
+          <a href="#about" class="nav-link">Our Company</a>
+          <a href="#brands" class="nav-link">Our Brands</a>
+        </div>
 
-        <img src="img/logo.png" alt="Company Logo" class="nav-logo-img" />
+        <a href="#" class="nav-logo-link">
+          <img src="img/logo.png" alt="RENUVA" class="nav-logo-img" />
+        </a>
 
-        <a href="#story" class="nav-link">Our Story</a>
+        <div class="nav-links-desktop">
+          <a href="#partners" class="nav-link">Partnerships</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </div>
+
+        <div class="hamburger" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
       </div>
     </nav>
 
-    <header class="hero" id="story">
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" class="nav-link" onclick="toggleMobileMenu()"
+        >Our Company</a
+      >
+      <a href="#brands" class="nav-link" onclick="toggleMobileMenu()"
+        >Our Brands</a
+      >
+      <a href="#partners" class="nav-link" onclick="toggleMobileMenu()"
+        >Partnerships</a
+      >
+      <a href="#faq" class="nav-link" onclick="toggleMobileMenu()">FAQ</a>
+    </div>
+
+    <header class="hero">
       <div class="hero-content">
-        <h1>2025 Annual Report<span>.</span></h1>
-        <a href="#" class="cta-button"
-          >Explore the report
-          <i class="fas fa-arrow-right" style="margin-left: 8px"></i
-        ></a>
+        <h1>RENUVA</h1>
+        <p>Practical and sustainable solutions for everyday use.</p>
       </div>
     </header>
 
-    <section class="brands-section" id="brands">
-      <div class="brands-header">
+    <section id="about" class="section-padding container">
+      <div class="about-grid reveal">
+        <div style="max-width: 800px; margin: 0 auto">
+          <h2>About Us</h2>
+          <p>
+            Renuva is a manufacturer-first company based in Makati, Philippines,
+            engaged in the production and distribution of eco-friendly household
+            products. We primarily work with business partners, including
+            distributors and resellers, to deliver practical and sustainable
+            solutions for everyday use.
+          </p>
+          <p>
+            Our operations focus on responsible manufacturing, consistent
+            product quality, and long-term partnerships. Sustainability guides
+            our decisions across all aspects of the business.
+          </p>
+        </div>
+
+        <div class="mvv-container">
+          <div class="mvv-card reveal">
+            <h3>Mission</h3>
+            <p>
+              To provide high-quality, eco-friendly household products that are
+              accessible and effective, fostering a cleaner and greener
+              environment for every Filipino home.
+            </p>
+          </div>
+          <div class="mvv-card reveal">
+            <h3>Vision</h3>
+            <p>
+              To be the leading partner in sustainable household manufacturing
+              in the Philippines, setting the standard for responsible
+              production and business integrity.
+            </p>
+          </div>
+          <div class="mvv-card reveal">
+            <h3>Core Values</h3>
+            <p>
+              Integrity, Innovation, Sustainability, Partnership, and Excellence
+              in every product we manufacture.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sustain" class="section-padding sustain-section reveal">
+      <div class="container">
+        <h2>Sustainability Commitment</h2>
+        <p>
+          Sustainability is integrated into every part of Renuva’s operations.
+          We prioritize eco-friendly formulations, efficient resource use, and
+          responsible manufacturing practices to reduce environmental impact.
+        </p>
+        <p>
+          Our goal is to continuously improve our processes and products while
+          maintaining reliability and affordability for our partners.
+        </p>
+      </div>
+    </section>
+
+    <section id="brands" class="section-padding container">
+      <div class="reveal" style="text-align: center; margin-bottom: 60px">
         <h2>Our Brands</h2>
-        <h3>Products that make life a little easier<span>.</span></h3>
+        <p>
+          Renuva develops and manages multiple product brands under its
+          portfolio.
+        </p>
       </div>
 
-      <div class="single-brand-container">
-        <a
-          href="https://google.com"
-          target="_blank"
-          class="brand-link"
-          title="Click to view brand"
-        >
-          <img src="img/oila.png" alt="Brand Name" class="brand-img" />
-        </a>
+      <div class="brand-layout reveal">
+        <div class="brand-visual">
+          <a href="#" class="brand-circle">
+            <img src="img/oila.png" alt="Oila Dishwashing Liquid" />
+          </a>
+        </div>
+
+        <div class="brand-info">
+          <h3>Oila</h3>
+          <p>
+            Oila is an eco-friendly and affordable dishwashing liquid developed
+            for business use. It is designed to meet the daily cleaning needs of
+            food stalls, small eateries, and retail buyers.
+          </p>
+          <br />
+          <p><strong>Status:</strong> Owned and Managed by Renuva.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="partners" class="section-padding bg-light">
+      <div class="container reveal">
+        <div class="partners-grid">
+          <div>
+            <h2>Why Partner With Renuva</h2>
+            <ul class="why-list">
+              <li>Manufacturer-first operations</li>
+              <li>Eco-friendly household product focus</li>
+              <li>Competitive and consistent supply</li>
+              <li>Local manufacturing and management</li>
+              <li>Long-term partnership approach</li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="info-card">
+              <h4>Distribution & Partnerships</h4>
+              <p>
+                Renuva partners with distributors, resellers, and retail
+                businesses seeking reliable eco-friendly household products. We
+                provide stable supply, clear coordination, and support for
+                business growth. Partnership inquiries may be submitted through
+                our official inquiry channels.
+              </p>
+            </div>
+
+            <div
+              class="info-card"
+              style="background: white; border-left-color: var(--dark-green)"
+            >
+              <h4>Financial Highlights</h4>
+              <p>
+                Delivering consistent growth through strategic B2B partnerships
+                and efficient manufacturing processes.
+              </p>
+            </div>
+
+            <div
+              class="info-card"
+              style="background: white; border-left-color: var(--light-green)"
+            >
+              <h4>CSR / Community Engagement</h4>
+              <p>
+                Committed to supporting local communities through educational
+                initiatives on hygiene and sustainability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section-padding container reveal">
+      <h2 style="text-align: center; width: 100%; margin-bottom: 50px">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is Renuva?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Renuva is a Philippine-based company engaged in the manufacturing
+              and distribution of eco-friendly household products. We work
+              closely with distributors and resellers to provide sustainable,
+              high-quality solutions for everyday use.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What type of products does Renuva offer?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Renuva specializes in household products designed with
+              sustainability in mind, balancing performance, affordability, and
+              environmental responsibility.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Where is Renuva located?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Renuva operates in the Philippines, with offices based in Makati.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Who does Renuva work with?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Renuva primarily works with distributors, resellers, and retail
+              partners. Our business model is focused on B2B partnerships.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does Renuva manufacture its own products?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Yes. Renuva is involved in both product manufacturing and
+              distribution, ensuring quality control from production to market.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is Renuva committed to sustainability?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Yes. Sustainability is a core value of Renuva. We focus on
+              eco-friendly formulations, responsible sourcing, and efficient
+              production processes to reduce environmental impact.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does Renuva own Oila?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Oila is a product brand developed and managed by Renuva.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How can distributors or resellers partner with Renuva?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Interested partners may contact us through our official website or
+              business inquiry channels to learn more about distribution and
+              reseller opportunities.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
     <footer>
-      <div class="footer-curve">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-            opacity=".25"
-            fill="#ffffff"
-          ></path>
-          <path
-            d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43c54.52-5.23,109.8,21.6,156.67,55.11V0Z"
-            fill="#ffffff"
-          ></path>
-        </svg>
-      </div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <div class="contact-details">
+              <p>
+                <i class="fas fa-map-marker-alt"></i>
+                1930 Einstein St., Brgy. San Isidro,<br />Makati City,
+                Philippines
+              </p>
+              <p>
+                <i class="fas fa-phone-alt"></i>
+                09457920295
+              </p>
+              <p>
+                <i class="fab fa-facebook"></i>
+                <a href="#" style="text-decoration: none"
+                  >Follow us on Facebook</a
+                >
+              </p>
+              <p>
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:inquiry@renuva.ph" style="text-decoration: none"
+                  >inquiry@renuva.ph</a
+                >
+              </p>
+            </div>
+          </div>
 
-      <div class="footer-content">
-        <div class="footer-column contact-info">
-          <h4>Contact Us</h4>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <p><a href="#about" style="text-decoration: none">About Us</a></p>
+            <p>
+              <a href="#brands" style="text-decoration: none">Our Brands</a>
+            </p>
+            <p>
+              <a href="#sustain" style="text-decoration: none"
+                >Sustainability</a
+              >
+            </p>
+          </div>
 
-          <p>
-            <i class="fas fa-map-marker-alt"></i>
-            1930 Einstein St., Brgy. San Isidro,<br />Makati City, Philippines
-          </p>
-
-          <p>
-            <i class="fas fa-phone-alt"></i>
-            09457920295
-          </p>
-
-          <p>
-            <i class="fas fa-envelope"></i>
-            email@example.com
-          </p>
-
-          <p>
-            <i class="fab fa-facebook"></i>
-            <a href="#" style="color: white; text-decoration: none"
-              >Follow us on Facebook</a
-            >
-          </p>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <p style="opacity: 0.8">Privacy Policy</p>
+            <p style="opacity: 0.8">Terms of Service</p>
+          </div>
         </div>
 
-        <div class="footer-column">
-          <h4>Partners & Investors</h4>
-          <p style="opacity: 0.7">Investors</p>
-          <p style="opacity: 0.7">Partner with us</p>
-          <p style="opacity: 0.7">Suppliers</p>
+        <div class="footer-bottom">
+          &copy; 2026 RENUVA. All Rights Reserved.
         </div>
-
-        <div class="footer-column">
-          <h4>Legal</h4>
-          <p style="opacity: 0.7">Privacy</p>
-          <p style="opacity: 0.7">Terms and Conditions</p>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        &copy; 2025 Procter & Gamble (Recreated) | All Rights Reserved.
       </div>
     </footer>
+
+    <script>
+      // 1. Mobile Menu Toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobileMenu");
+        menu.classList.toggle("active");
+      }
+
+      // 2. FAQ Accordion Logic
+      const faqQuestions = document.querySelectorAll(".faq-question");
+
+      faqQuestions.forEach((question) => {
+        question.addEventListener("click", () => {
+          const item = question.parentNode;
+          const answer = item.querySelector(".faq-answer");
+
+          item.classList.toggle("active");
+
+          if (item.classList.contains("active")) {
+            answer.style.maxHeight = answer.scrollHeight + "px";
+          } else {
+            answer.style.maxHeight = 0;
+          }
+        });
+      });
+
+      // 3. Scroll Reveal Animation
+      const observerOptions = {
+        threshold: 0.15,
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      const revealElements = document.querySelectorAll(".reveal");
+      revealElements.forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>
