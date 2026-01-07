@@ -528,6 +528,28 @@
         color: var(--light-blue) !important;
       }
 
+      /* CTA BUTTON STYLES */
+      .cta-button {
+        display: inline-block;
+        background-color: transparent;
+        color: var(--white);
+        padding: 12px 30px;
+        border: 2px solid var(--white);
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .cta-button:hover {
+        background-color: var(--white);
+        color: var(--dark-blue);
+        transform: translateY(-3px);
+      }
+
       /* =========================================
            RESPONSIVE MEDIA QUERIES
            ========================================= */
@@ -546,22 +568,24 @@
       }
 
       @media (max-width: 768px) {
-        /* General */
+        /* FIXED: Increased mobile padding so sections don't look cramped */
         .section-padding {
-          padding: 60px 0;
+          padding: 80px 0;
         }
+
         h2 {
           font-size: 2rem;
         }
 
+        /* Nav & Container Spacing */
         .nav-inner {
-          padding: 0 30px;
+          padding: 0 25px;
         }
-
         .container {
-          padding: 0 30px;
+          padding: 0 25px;
         }
 
+        /* Navigation Changes */
         .nav-links-desktop {
           display: none;
         }
@@ -569,6 +593,7 @@
           display: block;
         }
 
+        /* Typography */
         .hero h1 {
           font-size: 2.5rem;
         }
@@ -576,13 +601,13 @@
           font-size: 1.1rem;
         }
 
-        .mvv-container {
-          grid-template-columns: 1fr;
-        }
+        /* Grid Stacking */
+        .mvv-container,
         .partners-grid {
           grid-template-columns: 1fr;
         }
 
+        /* Brands Layout */
         .brand-layout {
           flex-direction: column;
           text-align: center;
@@ -596,6 +621,7 @@
           height: 220px;
         }
 
+        /* Footer */
         .footer-content {
           flex-direction: column;
           gap: 30px;
@@ -604,6 +630,7 @@
           margin-bottom: 20px;
         }
 
+        /* FAQ */
         .faq-question {
           font-size: 1rem;
           padding: 15px 10px;
@@ -664,6 +691,7 @@
       <div class="hero-content">
         <h1>RENUVA</h1>
         <p>Practical and sustainable solutions for everyday use.</p>
+        <a href="financials.html" class="cta-button">Financial Highlights</a>
       </div>
     </header>
 

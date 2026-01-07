@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Financial Highlights</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
+
+    <style>
+      /* --- REUSING MAIN VARIABLES --- */
+      :root {
+        --dark-blue: #4288a7;
+        --light-blue: #a4d5e7;
+        --dark-green: #149056;
+        --light-green: #44d381;
+        --white: #ffffff;
+        --off-white: #f8f9fa;
+        --text-dark: #2c3e50;
+        --border-color: #e9ecef;
+        --nav-height: 90px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+        color: var(--text-dark);
+        background-color: var(--white);
+        line-height: 1.6;
+      }
+
+      /* --- ANIMATIONS --- */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+      }
+
+      /* --- NAV STYLES (MATCHING INDEX.HTML) --- */
+      nav {
+        background-color: var(--white);
+        height: var(--nav-height);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .nav-inner {
+        width: 100%;
+        max-width: 1400px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+        position: relative;
+      }
+      .nav-logo-link {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        z-index: 10;
+      }
+      .nav-logo-img {
+        height: 60px;
+        width: auto;
+        transition: transform 0.3s;
+      }
+      .nav-logo-img:hover {
+        transform: scale(1.05);
+      }
+
+      .nav-links-desktop {
+        display: flex;
+        gap: 30px;
+      }
+      .nav-link {
+        text-decoration: none;
+        color: var(--dark-blue);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        transition: color 0.3s;
+      }
+      .nav-link:hover {
+        color: var(--dark-green);
+      }
+
+      /* Mobile Hamburger */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--dark-blue);
+        margin-left: auto;
+        z-index: 20;
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        border-top: 1px solid #eee;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+      }
+      .mobile-menu.active {
+        transform: translateY(0);
+      }
+      .mobile-menu .nav-link {
+        margin: 15px 0;
+        font-size: 1.1rem;
+      }
+
+      /* --- PAGE HEADER --- */
+      .page-header {
+        background: linear-gradient(135deg, var(--dark-blue) 0%, #2c5f78 100%);
+        color: var(--white);
+        padding: 60px 20px 80px 20px;
+        text-align: center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .page-header h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        letter-spacing: -1px;
+      }
+      .page-header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Back Link Styled for Header */
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        color: var(--white); /* White text for dark background */
+        background: rgba(255, 255, 255, 0.1); /* Subtle background pill */
+        padding: 8px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .back-link:hover {
+        background: var(--white);
+        color: var(--dark-blue);
+        transform: translateY(-2px);
+      }
+
+      /* --- TABLE SECTION --- */
+      .table-section {
+        padding: 0 0 100px 0;
+        background-color: #fcfcfc;
+        margin-top: -40px;
+      } /* Negative margin pulls table up */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 50px;
+      }
+
+      .table-wrapper {
+        overflow-x: auto;
+        background: var(--white);
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+        border: 1px solid var(--border-color);
+        position: relative;
+        z-index: 10; /* Ensures it sits on top if we overlap */
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 900px;
+        white-space: nowrap;
+      }
+
+      thead th {
+        background-color: var(--white);
+        color: var(--text-light);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        padding: 20px 25px;
+        border-bottom: 2px solid var(--dark-blue);
+        text-align: right;
+      }
+
+      thead th:first-child {
+        text-align: left;
+        position: sticky;
+        left: 0;
+        z-index: 10;
+        background-color: var(--white);
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
+      }
+
+      tbody td {
+        padding: 18px 25px;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-dark);
+        font-size: 0.95rem;
+        text-align: right;
+        transition: background-color 0.2s;
+      }
+
+      tbody td:first-child {
+        text-align: left;
+        font-weight: 600;
+        color: var(--dark-blue);
+        position: sticky;
+        left: 0;
+        background-color: var(--white);
+        z-index: 5;
+        border-right: 1px solid var(--border-color);
+      }
+
+      tbody tr:hover td {
+        background-color: #f1f7fa;
+      }
+      tbody tr:hover td:first-child {
+        background-color: #f1f7fa;
+      }
+
+      tbody tr {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      tbody tr.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background-color: var(--dark-blue);
+        color: var(--white);
+        padding: 40px 0;
+        text-align: center;
+        margin-top: auto;
+      }
+      footer p {
+        color: var(--white);
+        opacity: 0.8;
+        font-size: 0.9rem;
+      }
+
+      /* Mobile Adjustments */
+      @media (max-width: 768px) {
+        .nav-inner,
+        .container {
+          padding: 0 25px;
+        }
+        .nav-links-desktop {
+          display: none;
+        }
+        .hamburger {
+          display: block;
+        }
+
+        .page-header h1 {
+          font-size: 2rem;
+        }
+
+        /* Table Shadow on Mobile */
+        tbody td:first-child,
+        thead th:first-child {
+          box-shadow: 4px 0 8px rgba(0, 0, 0, 0.05);
+          border-right: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-inner">
+        <div class="nav-links-desktop">
+          <a href="index.html#about" class="nav-link">Our Company</a>
+          <a href="index.html#brands" class="nav-link">Our Brands</a>
+        </div>
+
+        <a href="index.html" class="nav-logo-link">
+          <img src="img/logo.png" alt="RENUVA" class="nav-logo-img" />
+        </a>
+
+        <div class="nav-links-desktop">
+          <a href="index.html#partners" class="nav-link">Partnerships</a>
+          <a href="index.html#faq" class="nav-link">FAQ</a>
+        </div>
+
+        <div class="hamburger" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#about" class="nav-link">Our Company</a>
+      <a href="index.html#brands" class="nav-link">Our Brands</a>
+      <a href="index.html#partners" class="nav-link">Partnerships</a>
+      <a href="index.html#faq" class="nav-link">FAQ</a>
+    </div>
+
+    <header class="page-header animate-fade-up">
+      <a href="index.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+
+      <h1>Financial Highlights</h1>
+      <p>Projected Growth & Performance (2026-2030)</p>
+    </header>
+
+    <section class="table-section">
+      <div class="container">
+        <div
+          class="table-wrapper animate-fade-up"
+          style="animation-delay: 0.2s"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th>Financial Indicator</th>
+                <th>2026</th>
+                <th>2027</th>
+                <th>2028</th>
+                <th>2029</th>
+                <th>2030</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sales</td>
+                <td>₱2,191,393</td>
+                <td>₱2,601,875</td>
+                <td>₱3,086,227.68</td>
+                <td>₱3,667,139.51</td>
+                <td>₱4,352,820.31</td>
+              </tr>
+              <tr>
+                <td>Gross Margin (%)</td>
+                <td>25%</td>
+                <td>30%</td>
+                <td>3,086,227.68</td>
+                <td>3,667,139.51</td>
+                <td>4,352,820.31</td>
+              </tr>
+              <tr>
+                <td>Gross Profit Ratio</td>
+                <td>0.25</td>
+                <td>0.30</td>
+                <td>0.33</td>
+                <td>0.36</td>
+                <td>0.39</td>
+              </tr>
+              <tr>
+                <td>Net Income</td>
+                <td>₱84,235.09</td>
+                <td>₱258,137.46</td>
+                <td>₱453,137.34</td>
+                <td>₱692,837.68</td>
+                <td>₱977,910.35</td>
+              </tr>
+              <tr>
+                <td>Net Profit Ratio</td>
+                <td>0.04</td>
+                <td>0.10</td>
+                <td>0.15</td>
+                <td>0.19</td>
+                <td>0.22</td>
+              </tr>
+              <tr>
+                <td>Operating Cash Flow</td>
+                <td>₱158,344.73</td>
+                <td>₱244,263.87</td>
+                <td>₱414,137.78</td>
+                <td>₱623,415.22</td>
+                <td>₱868,877.53</td>
+              </tr>
+              <tr>
+                <td>Total Assets</td>
+                <td>₱1,110,602.47</td>
+                <td>₱1,191,038.26</td>
+                <td>₱1,321,826.25</td>
+                <td>₱1,521,632.97</td>
+                <td>₱1,793,844.44</td>
+              </tr>
+              <tr>
+                <td>Total Liabilities</td>
+                <td>₱74,367.38</td>
+                <td>₱92,665.71</td>
+                <td>₱113,316.37</td>
+                <td>₱138,285.40</td>
+                <td>₱167,586.53</td>
+              </tr>
+              <tr>
+                <td>Break Even In Units</td>
+                <td>22,862</td>
+                <td>18,235</td>
+                <td>15,823</td>
+                <td>14,096</td>
+                <td>12,889</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2026 RENUVA. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile Menu Toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobileMenu");
+        menu.classList.toggle("active");
+      }
+
+      // Table Animation
+      document.addEventListener("DOMContentLoaded", () => {
+        const rows = document.querySelectorAll("tbody tr");
+        rows.forEach((row, index) => {
+          setTimeout(() => {
+            row.classList.add("visible");
+          }, 400 + index * 80);
+        });
+      });
+    </script>
+  </body>
+</html>
