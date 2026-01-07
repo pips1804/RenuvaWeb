@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Team</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
+
+    <style>
+      /* --- CSS VARIABLES --- */
+      :root {
+        --dark-blue: #4288a7;
+        --light-blue: #a4d5e7;
+        --dark-green: #149056;
+        --light-green: #44d381;
+        --white: #ffffff;
+        --off-white: #f9fbfd;
+        --text-dark: #333333;
+        --nav-height: 90px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+        color: var(--text-dark);
+        background-color: var(--white);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* --- ANIMATIONS --- */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+      }
+
+      /* --- NAV STYLES --- */
+      nav {
+        background-color: var(--white);
+        height: var(--nav-height);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .nav-inner {
+        width: 100%;
+        max-width: 1400px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+        position: relative;
+      }
+      .nav-logo-link {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        z-index: 10;
+      }
+      .nav-logo-img {
+        height: 60px;
+        width: auto;
+        transition: transform 0.3s;
+      }
+      .nav-logo-img:hover {
+        transform: scale(1.05);
+      }
+      .nav-links-desktop {
+        display: flex;
+        gap: 30px;
+      }
+      .nav-link {
+        text-decoration: none;
+        color: var(--dark-blue);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        transition: color 0.3s;
+      }
+      .nav-link:hover {
+        color: var(--dark-green);
+      }
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--dark-blue);
+        margin-left: auto;
+        z-index: 20;
+      }
+      .mobile-menu {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        border-top: 1px solid #eee;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+      }
+      .mobile-menu.active {
+        transform: translateY(0);
+      }
+      .mobile-menu .nav-link {
+        margin: 15px 0;
+        font-size: 1.1rem;
+      }
+
+      /* --- PAGE HEADER --- */
+      .page-header {
+        background: linear-gradient(135deg, var(--dark-blue) 0%, #2c5f78 100%);
+        color: var(--white);
+        padding: 40px 20px;
+        text-align: center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .page-header h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 5px;
+        letter-spacing: -1px;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 15px;
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.1);
+        padding: 6px 18px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.8rem;
+        transition: all 0.2s;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .back-link:hover {
+        background: var(--white);
+        color: var(--dark-blue);
+        transform: translateY(-2px);
+      }
+
+      /* --- CAROUSEL TEAM SECTION --- */
+      .team-section {
+        padding: 60px 0;
+        background-color: var(--off-white);
+        min-height: 600px; /* Ensures it takes up space */
+        display: flex;
+        align-items: center;
+        overflow: hidden; /* Hides overflow cards */
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        width: 100%;
+      }
+
+      /* The Wrapper for the slider */
+      .carousel-container {
+        position: relative;
+        width: 100%;
+        height: 450px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+      }
+
+      /* NAVIGATION ARROWS */
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: var(--dark-blue);
+        color: var(--white);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+      }
+      .carousel-btn:hover {
+        background-color: var(--dark-green);
+        transform: translateY(-50%) scale(1.1);
+      }
+      .btn-prev {
+        left: 0;
+      }
+      .btn-next {
+        right: 0;
+      }
+
+      /* CARD STYLING */
+      .member-card {
+        width: 280px;
+        height: 380px;
+        position: absolute; /* Stacked on top of each other */
+        top: 50%;
+        left: 50%;
+        /* Default state: hidden/centered */
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        cursor: pointer;
+        z-index: 0;
+      }
+
+      /* CAROUSEL STATES */
+
+      /* Active Card: Center, Big, Top Z-index */
+      .member-card.active {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        z-index: 10;
+        pointer-events: auto;
+      }
+
+      /* Next Card: Shift Right, Smaller, Lower Opacity */
+      .member-card.next {
+        transform: translate(10%, -50%) scale(0.85);
+        opacity: 0.6;
+        z-index: 5;
+        pointer-events: none; /* Make unclickable so you don't accidentally flip */
+      }
+
+      /* Prev Card: Shift Left, Smaller, Lower Opacity */
+      .member-card.prev {
+        transform: translate(-110%, -50%) scale(0.85);
+        opacity: 0.6;
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      /* --- FLIP LOGIC (Same as before) --- */
+      .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+      }
+      .member-card.active.flipped .card-inner {
+        transform: rotateY(180deg);
+      } /* Only flip if active */
+
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+      }
+
+      .card-front {
+        background-color: var(--white);
+        border-top: 6px solid var(--dark-blue);
+      }
+
+      .member-img {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--light-blue);
+        margin-bottom: 20px;
+      }
+      .member-role {
+        color: var(--dark-blue);
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+      .member-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        border-bottom: 2px solid var(--light-blue);
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+      }
+      .tap-hint {
+        font-size: 0.75rem;
+        color: #888;
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .card-back {
+        background-color: var(--dark-blue);
+        color: var(--white);
+        transform: rotateY(180deg);
+      }
+      .card-back h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        color: var(--light-blue);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 10px;
+        width: 100%;
+      }
+      .card-back p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        opacity: 0.9;
+      }
+
+      /* Pagination Dots */
+      .pagination-dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 10px;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        background-color: #ccc;
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+      .dot.active {
+        background-color: var(--dark-blue);
+        transform: scale(1.2);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background-color: var(--dark-blue);
+        color: var(--white);
+        padding: 40px 0;
+        text-align: center;
+        margin-top: auto;
+      }
+      footer p {
+        color: var(--white);
+        opacity: 0.8;
+        font-size: 0.9rem;
+      }
+
+      /* --- RESPONSIVE --- */
+      @media (max-width: 768px) {
+        .nav-links-desktop {
+          display: none;
+        }
+        .hamburger {
+          display: block;
+        }
+
+        .carousel-container {
+          height: 420px;
+        }
+        .member-card {
+          width: 260px;
+          height: 360px;
+        }
+
+        /* Adjust positioning for mobile: Stack closer */
+        .member-card.next {
+          transform: translate(30%, -50%) scale(0.8);
+          opacity: 0.4;
+        }
+        .member-card.prev {
+          transform: translate(-130%, -50%) scale(0.8);
+          opacity: 0.4;
+        }
+
+        /* Move buttons to bottom on mobile to avoid covering cards */
+        .carousel-btn {
+          top: 105%;
+          width: 40px;
+          height: 40px;
+        }
+        .btn-prev {
+          left: 30%;
+        }
+        .btn-next {
+          right: 30%;
+        }
+        .team-section {
+          padding-bottom: 80px;
+        } /* Extra space for buttons */
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-inner">
+        <div class="nav-links-desktop">
+          <a href="index.html#about" class="nav-link">Our Company</a>
+          <a href="index.html#brands" class="nav-link">Our Brands</a>
+        </div>
+        <a href="index.html" class="nav-logo-link">
+          <img src="img/logo.png" alt="RENUVA" class="nav-logo-img" />
+        </a>
+        <div class="nav-links-desktop">
+          <a href="index.html#partners" class="nav-link">Partnerships</a>
+          <a href="index.html#faq" class="nav-link">FAQ</a>
+        </div>
+        <div class="hamburger" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#about" class="nav-link" onclick="toggleMobileMenu()"
+        >Our Company</a
+      >
+      <a href="index.html#brands" class="nav-link" onclick="toggleMobileMenu()"
+        >Our Brands</a
+      >
+      <a
+        href="index.html#partners"
+        class="nav-link"
+        onclick="toggleMobileMenu()"
+        >Partnerships</a
+      >
+      <a href="index.html#faq" class="nav-link" onclick="toggleMobileMenu()"
+        >FAQ</a
+      >
+    </div>
+
+    <header class="page-header animate-fade-up">
+      <a href="index.html" class="back-link"
+        ><i class="fas fa-arrow-left"></i> Back to Home</a
+      >
+      <h1>Our Team</h1>
+      <p style="color: white">The people driving Renuva forward.</p>
+    </header>
+
+    <section class="team-section">
+      <div class="container">
+        <div class="carousel-container">
+          <button class="carousel-btn btn-prev" onclick="moveSlide(-1)">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-btn btn-next" onclick="moveSlide(1)">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+
+          <div class="member-card active" onclick="flipCard(this)">
+            <div class="card-inner">
+              <div class="card-front">
+                <img
+                  src="/img/members/kirby.png"
+                  alt="CEO"
+                  class="member-img"
+                />
+                <div class="member-name">Flores, Kirby Jhey S.</div>
+                <div class="member-role">Chief Executive Officer</div>
+                <div class="tap-hint">
+                  <i class="fas fa-hand-pointer"></i> Tap to flip
+                </div>
+              </div>
+              <div class="card-back">
+                <h3>CEO</h3>
+                <p>
+                  Leads the company's strategic direction, overseeing overall
+                  operations and ensuring long-term sustainable growth for
+                  Renuva.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="member-card next" onclick="flipCard(this)">
+            <div class="card-inner">
+              <div class="card-front">
+                <img src="/img/members/arah.png" alt="EVP" class="member-img" />
+                <div class="member-name">Metoda, Arah Grace B.</div>
+                <div class="member-role">Executive Vice President</div>
+                <div class="tap-hint">
+                  <i class="fas fa-hand-pointer"></i> Tap to flip
+                </div>
+              </div>
+              <div class="card-back">
+                <h3>Executive VP</h3>
+                <p>
+                  Supports the CEO in global strategy execution and drives
+                  organizational effectiveness across all departments.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="member-card" onclick="flipCard(this)">
+            <div class="card-inner">
+              <div class="card-front">
+                <img
+                  src="/img/members/mariel.png"
+                  alt="R&D"
+                  class="member-img"
+                />
+                <div class="member-name">Regio, Mariel Nicole B.</div>
+                <div class="member-role">R&D Manager</div>
+                <div class="tap-hint">
+                  <i class="fas fa-hand-pointer"></i> Tap to flip
+                </div>
+              </div>
+              <div class="card-back">
+                <h3>R&D Manager</h3>
+                <p>
+                  Spearheads product innovation, ensuring all formulations meet
+                  strict eco-friendly and quality standards.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="member-card" onclick="flipCard(this)">
+            <div class="card-inner">
+              <div class="card-front">
+                <img
+                  src="/img/members/drei.png"
+                  alt="Sales"
+                  class="member-img"
+                />
+                <div class="member-name">Formaran, Russell Andrei S.</div>
+                <div class="member-role">Marketing & Sales Manager</div>
+                <div class="tap-hint">
+                  <i class="fas fa-hand-pointer"></i> Tap to flip
+                </div>
+              </div>
+              <div class="card-back">
+                <h3>Marketing & Sales</h3>
+                <p>
+                  Drives brand awareness and manages key partnerships with
+                  distributors and retail clients.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="member-card" onclick="flipCard(this)">
+            <div class="card-inner">
+              <div class="card-front">
+                <img
+                  src="/img/members/jas.png"
+                  alt="Finance"
+                  class="member-img"
+                />
+                <div class="member-name">Rasola, Jasmine P.</div>
+                <div class="member-role">Finance Manager</div>
+                <div class="tap-hint">
+                  <i class="fas fa-hand-pointer"></i> Tap to flip
+                </div>
+              </div>
+              <div class="card-back">
+                <h3>Finance Manager</h3>
+                <p>
+                  Oversees financial planning, budgeting, and reporting to
+                  ensure the company's fiscal health.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="member-card" onclick="flipCard(this)">
+            <div class="card-inner">
+              <div class="card-front">
+                <img
+                  src="/img/members/uriel.png"
+                  alt="Ops"
+                  class="member-img"
+                />
+                <div class="member-name">Cunanan, Uriel H.</div>
+                <div class="member-role">Operations Manager</div>
+                <div class="tap-hint">
+                  <i class="fas fa-hand-pointer"></i> Tap to flip
+                </div>
+              </div>
+              <div class="card-back">
+                <h3>Operations Manager</h3>
+                <p>
+                  Manages daily production workflows, facility maintenance, and
+                  operational efficiency.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="member-card prev" onclick="flipCard(this)">
+            <div class="card-inner">
+              <div class="card-front">
+                <img
+                  src="/img/members/jaimelyn.png"
+                  alt="Supply Chain"
+                  class="member-img"
+                />
+                <div class="member-name">Lirio, Jaimelyn G.</div>
+                <div class="member-role">Supply Chain Manager</div>
+                <div class="tap-hint">
+                  <i class="fas fa-hand-pointer"></i> Tap to flip
+                </div>
+              </div>
+              <div class="card-back">
+                <h3>Supply Chain Manager</h3>
+                <p>
+                  Coordinates logistics, procurement, and distribution to ensure
+                  timely delivery of products.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination-dots" id="dotsContainer"></div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2026 RENUVA. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobileMenu");
+        menu.classList.toggle("active");
+      }
+
+      /* --- CAROUSEL LOGIC --- */
+      let currentIndex = 0;
+      const cards = document.querySelectorAll(".member-card");
+      const dotsContainer = document.getElementById("dotsContainer");
+
+      // Initialize Dots
+      cards.forEach((_, index) => {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        if (index === 0) dot.classList.add("active");
+        dotsContainer.appendChild(dot);
+      });
+      const dots = document.querySelectorAll(".dot");
+
+      function updateClasses() {
+        // Reset all classes first
+        cards.forEach((card) => {
+          card.className = "member-card"; // Removes active, prev, next, flipped
+        });
+        dots.forEach((dot) => dot.classList.remove("active"));
+
+        // Calculate Indices
+        const total = cards.length;
+        const prevIndex = (currentIndex - 1 + total) % total;
+        const nextIndex = (currentIndex + 1) % total;
+
+        // Assign Classes
+        cards[currentIndex].classList.add("active");
+        cards[prevIndex].classList.add("prev");
+        cards[nextIndex].classList.add("next");
+
+        // Update Dot
+        dots[currentIndex].classList.add("active");
+      }
+
+      function moveSlide(direction) {
+        const total = cards.length;
+        currentIndex = (currentIndex + direction + total) % total;
+        updateClasses();
+      }
+
+      // Flip Logic Wrapper
+      function flipCard(element) {
+        // Only allow flipping if the card is active
+        if (element.classList.contains("active")) {
+          element.classList.toggle("flipped");
+        } else {
+          // If clicking a side card, move to it instead of flipping
+          if (element.classList.contains("next")) moveSlide(1);
+          if (element.classList.contains("prev")) moveSlide(-1);
+        }
+      }
+
+      // Initialize
+      updateClasses();
+    </script>
+  </body>
+</html>

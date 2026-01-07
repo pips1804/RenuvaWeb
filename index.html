@@ -65,6 +65,28 @@
         background-color: var(--off-white);
       }
 
+      /* Button for White Backgrounds */
+      .btn-primary {
+        display: inline-block;
+        background-color: var(--dark-blue);
+        color: var(--white);
+        padding: 12px 35px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+        border: 2px solid var(--dark-blue);
+      }
+
+      .btn-primary:hover {
+        background-color: transparent;
+        color: var(--dark-blue);
+        transform: translateY(-3px);
+      }
+
       h2 {
         color: var(--dark-blue);
         font-size: 2.5rem;
@@ -710,6 +732,10 @@
             product quality, and long-term partnerships. Sustainability guides
             our decisions across all aspects of the business.
           </p>
+
+          <div style="margin-bottom: 40px">
+            <a href="team.html" class="btn-primary">Meet Our Team</a>
+          </div>
         </div>
 
         <div class="mvv-container">
@@ -766,7 +792,11 @@
 
       <div class="brand-layout reveal">
         <div class="brand-visual">
-          <a href="https://oila-web.vercel.app/" class="brand-circle">
+          <a
+            href="https://oila-web.vercel.app/"
+            target="_blank"
+            class="brand-circle"
+          >
             <img src="img/oila.png" alt="Oila Dishwashing Liquid" />
           </a>
         </div>
