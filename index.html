@@ -109,7 +109,7 @@
         }
       }
 
-      /* --- NAVIGATION (UPDATED ALIGNMENT) --- */
+      /* --- NAVIGATION --- */
       nav {
         background-color: var(--white);
         height: var(--nav-height);
@@ -130,7 +130,6 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 50px;
-        /* IMPORTANT: Position relative allows the absolute positioned logo to center itself relative to this container */
         position: relative;
       }
 
@@ -154,16 +153,14 @@
         color: var(--dark-green);
       }
 
-      /* UPDATED LOGO LINK STYLES */
       .nav-logo-link {
-        /* This forces the logo to the DEAD CENTER of the navbar, ignoring side link widths */
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 10; /* Keeps it on top */
+        z-index: 10;
       }
 
       .nav-logo-img {
@@ -182,7 +179,6 @@
         cursor: pointer;
         font-size: 1.5rem;
         color: var(--dark-blue);
-        /* UPDATED: Ensures hamburger stays on the right even when logo is absolute */
         margin-left: auto;
         z-index: 20;
       }
@@ -568,9 +564,9 @@
       }
 
       @media (max-width: 768px) {
-        /* FIXED: Increased mobile padding so sections don't look cramped */
+        /* FIXED: Increased mobile padding (120px) to prevent cramping */
         .section-padding {
-          padding: 80px 0;
+          padding: 120px 0;
         }
 
         h2 {
@@ -639,6 +635,9 @@
         .faq-icon {
           margin-top: 5px;
         }
+        .for-mobile-view {
+          margin-top: 40px;
+        }
       }
 
       @media (max-width: 480px) {
@@ -698,7 +697,7 @@
     <section id="about" class="section-padding container">
       <div class="about-grid reveal">
         <div style="max-width: 800px; margin: 0 auto">
-          <h2>About Us</h2>
+          <h2 class="for-mobile-view">About Us</h2>
           <p>
             Renuva is a manufacturer-first company based in Makati, Philippines,
             engaged in the production and distribution of eco-friendly household
@@ -758,7 +757,7 @@
 
     <section id="brands" class="section-padding container">
       <div class="reveal" style="text-align: center; margin-bottom: 60px">
-        <h2>Our Brands</h2>
+        <h2 class="for-mobile-view">Our Brands</h2>
         <p>
           Renuva develops and manages multiple product brands under its
           portfolio.

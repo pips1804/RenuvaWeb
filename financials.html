@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Financial Highlights</title>
+    <title>Financial Highlights | RENUVA</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -12,7 +12,6 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
 
     <style>
       /* --- REUSING MAIN VARIABLES --- */
@@ -57,7 +56,7 @@
         opacity: 0;
       }
 
-      /* --- NAV STYLES (MATCHING INDEX.HTML) --- */
+      /* --- NAV STYLES --- */
       nav {
         background-color: var(--white);
         height: var(--nav-height);
@@ -170,14 +169,13 @@
         margin: 0 auto;
       }
 
-      /* Back Link Styled for Header */
       .back-link {
         display: inline-flex;
         align-items: center;
         gap: 8px;
         margin-bottom: 20px;
-        color: var(--white); /* White text for dark background */
-        background: rgba(255, 255, 255, 0.1); /* Subtle background pill */
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.1);
         padding: 8px 20px;
         border-radius: 30px;
         text-decoration: none;
@@ -197,7 +195,7 @@
         padding: 0 0 100px 0;
         background-color: #fcfcfc;
         margin-top: -40px;
-      } /* Negative margin pulls table up */
+      }
       .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -208,16 +206,18 @@
         overflow-x: auto;
         background: var(--white);
         border-radius: 12px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
         border: 1px solid var(--border-color);
         position: relative;
-        z-index: 10; /* Ensures it sits on top if we overlap */
+        z-index: 10;
+        /* Smoother scrolling on mobile */
+        -webkit-overflow-scrolling: touch;
       }
 
       table {
         width: 100%;
         border-collapse: collapse;
-        min-width: 900px;
+        min-width: 900px; /* Forces scroll on mobile */
         white-space: nowrap;
       }
 
@@ -293,11 +293,13 @@
         font-size: 0.9rem;
       }
 
-      /* Mobile Adjustments */
+      /* =========================================
+         MOBILE RESPONSIVE ADJUSTMENTS
+         ========================================= */
       @media (max-width: 768px) {
         .nav-inner,
         .container {
-          padding: 0 25px;
+          padding: 0 20px;
         }
         .nav-links-desktop {
           display: none;
@@ -306,15 +308,26 @@
           display: block;
         }
 
+        .page-header {
+          padding-top: 40px;
+        }
         .page-header h1 {
           font-size: 2rem;
         }
 
-        /* Table Shadow on Mobile */
+        /* Reduce table padding and font size on mobile */
+        thead th,
+        tbody td {
+          padding: 12px 15px; /* Tighter padding */
+          font-size: 0.8rem; /* Smaller text */
+        }
+
+        /* Adjust Sticky Header Shadow */
         tbody td:first-child,
         thead th:first-child {
           box-shadow: 4px 0 8px rgba(0, 0, 0, 0.05);
           border-right: none;
+          min-width: 140px; /* Ensure label is readable */
         }
       }
     </style>
@@ -388,65 +401,57 @@
                 <td>Gross Margin (%)</td>
                 <td>25%</td>
                 <td>30%</td>
-                <td>3,086,227.68</td>
-                <td>3,667,139.51</td>
-                <td>4,352,820.31</td>
+                <td>33%</td>
+                <td>36%</td>
+                <td>39%</td>
               </tr>
               <tr>
-                <td>Gross Profit Ratio</td>
-                <td>0.25</td>
-                <td>0.30</td>
-                <td>0.33</td>
-                <td>0.36</td>
-                <td>0.39</td>
+                <td>Gross Profit</td>
+                <td>₱556,254</td>
+                <td>₱770,224</td>
+                <td>₱1,024,534</td>
+                <td>₱1,335,364</td>
+                <td>₱1,703,673</td>
+              </tr>
+              <tr>
+                <td>Net Margin (%)</td>
+                <td>4%</td>
+                <td>10%</td>
+                <td>15%</td>
+                <td>19%</td>
+                <td>22%</td>
               </tr>
               <tr>
                 <td>Net Income</td>
-                <td>₱84,235.09</td>
-                <td>₱258,137.46</td>
-                <td>₱453,137.34</td>
-                <td>₱692,837.68</td>
-                <td>₱977,910.35</td>
-              </tr>
-              <tr>
-                <td>Net Profit Ratio</td>
-                <td>0.04</td>
-                <td>0.10</td>
-                <td>0.15</td>
-                <td>0.19</td>
-                <td>0.22</td>
+                <td>₱84,235</td>
+                <td>₱258,137</td>
+                <td>₱453,137</td>
+                <td>₱692,838</td>
+                <td>₱977,910</td>
               </tr>
               <tr>
                 <td>Operating Cash Flow</td>
-                <td>₱158,344.73</td>
-                <td>₱244,263.87</td>
-                <td>₱414,137.78</td>
-                <td>₱623,415.22</td>
-                <td>₱868,877.53</td>
+                <td>₱ 158,344.73</td>
+                <td>₱ 244,263.87</td>
+                <td>₱ 414,137.78</td>
+                <td>₱ 623,415.22</td>
+                <td>₱ 868,877.53</td>
               </tr>
               <tr>
                 <td>Total Assets</td>
-                <td>₱1,110,602.47</td>
-                <td>₱1,191,038.26</td>
-                <td>₱1,321,826.25</td>
-                <td>₱1,521,632.97</td>
-                <td>₱1,793,844.44</td>
+                <td>₱ 1,110,602.47</td>
+                <td>₱ 1,191,038.26</td>
+                <td>₱ 1,321,826.25</td>
+                <td>₱ 1,521,632.97</td>
+                <td>₱ 1,793,844.44</td>
               </tr>
               <tr>
                 <td>Total Liabilities</td>
-                <td>₱74,367.38</td>
-                <td>₱92,665.71</td>
-                <td>₱113,316.37</td>
-                <td>₱138,285.40</td>
-                <td>₱167,586.53</td>
-              </tr>
-              <tr>
-                <td>Break Even In Units</td>
-                <td>22,862</td>
-                <td>18,235</td>
-                <td>15,823</td>
-                <td>14,096</td>
-                <td>12,889</td>
+                <td>₱ 74,367.38</td>
+                <td>₱ 92,665.71</td>
+                <td>₱ 113,316.37</td>
+                <td>₱ 138,285.40</td>
+                <td>₱ 167,586.53</td>
               </tr>
             </tbody>
           </table>
